@@ -86,3 +86,51 @@ modeToggle.addEventListener("click", () => {
     modeIcon.textContent = "dark_mode";
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const faqItems = document.querySelectorAll(".faq-item");
+
+  function closeItem(item) {
+    const answer = item.querySelector(".faq-answer");
+    const startHeight = answer.offsetHeight;
+    answer.style.height = startHeight + "px";
+    answer.offsetHeight; // Force reflow
+    answer.style.height = "0px";
+    item.classList.remove("active");
+  }
+
+  function openItem(item) {
+    const answer = item.querySelector(".faq-answer");
+    answer.style.height = "auto";
+    const startHeight = answer.offsetHeight;
+    answer.style.height = "0px";
+    answer.offsetHeight; // Force reflow
+    answer.style.height = startHeight + "px";
+    item.classList.add("active");
+
+    answer.addEventListener("transitionend", function transitionEnd() {
+      answer.style.height = "auto";
+      answer.removeEventListener("transitionend", transitionEnd);
+    });
+  }
+
+  faqItems.forEach((item) => {
+    const question = item.querySelector(".faq-question");
+
+    question.addEventListener("click", () => {
+      const isOpening = !item.classList.contains("active");
+
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== item && otherItem.classList.contains("active")) {
+          closeItem(otherItem);
+        }
+      });
+
+      if (isOpening) {
+        openItem(item);
+      } else {
+        closeItem(item);
+      }
+    });
+  });
+});

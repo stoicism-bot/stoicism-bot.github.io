@@ -19,7 +19,7 @@
     <nav class="navbar">
       <div class="nav-container">
         <a
-          href="#"
+          href="/"
           class="logo fredoka-medium"
           draggable="false"
           style="user-select: none"
@@ -31,8 +31,8 @@
           Stoicism</a
         >
         <ul class="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Statistic</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="#">Stats</a></li>
           <li><a href="#">Tools</a></li>
           <li><a href="#">Community</a></li>
           <li>
@@ -55,35 +55,54 @@
           <h1 class="fredoka-medium">Stoicism</h1>
         </span>
         <div class="stats fade-in-button" style="--delay: 0.1s">
-          The <strong>⚔ bloody rival ⚔</strong> that's free for everyone,
+          The <strong>bloody rival</strong> bot that's free for everyone,
           always.
         </div>
       </div>
 
       <div class="buttons-grid">
         <button class="button accent fade-in-button" style="--delay: 0.5s">
-          Invite
+          <span class="material-symbols-rounded">add</span>Invite
         </button>
         <button class="button fade-in-button" style="--delay: 0.55s">
-          Commands
+          <span class="material-symbols-rounded">code</span>Commands
         </button>
-        <button class="button fade-in-button" style="--delay: 0.6s">FAQ</button>
+        <a href="/faq">
+          <button class="button fade-in-button" style="--delay: 0.6s">
+            <span class="material-symbols-rounded">help</span>FAQ
+          </button></a
+        >
         <button class="button fade-in-button" style="--delay: 0.65s">
-          Docs
+          <span class="material-symbols-rounded">description</span>Docs
         </button>
         <button class="button fade-in-button" style="--delay: 0.7s">
-          Support
+          <span class="material-symbols-rounded">support</span>Support
         </button>
         <button class="button fade-in-button" style="--delay: 0.75s">
-          Status
+          <span class="material-symbols-rounded">monitor_heart</span>Status
         </button>
       </div>
     </div>
-    <footer
-      class="fade-in"
-      style="position: absolute; bottom: 20px; overflow: hidden"
-    >
-      &copy; 2024 Stoicism. All rights reserved.
+    <footer style="position: absolute; bottom: 20px; overflow: hidden">
+      &copy; 2024 Stoicism. All rights reserved.<br /><a href="/terms"
+        ><span
+          class="material-symbols-rounded"
+          style="font-size: 14px; transform: translateY(2px)"
+        >
+          gavel
+        </span>
+        Terms</a
+      >
+      &middot;
+      <a href="/privacy"
+        ><span
+          class="material-symbols-rounded"
+          style="font-size: 14px; transform: translateY(2px)"
+        >
+          lock
+        </span>
+        Privacy</a
+      >
     </footer>
   </body>
   <script src="script.js"></script>

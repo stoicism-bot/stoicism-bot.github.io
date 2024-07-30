@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import url('https://fonts.cdnfonts.com/css/codec-pro');
 
 :root {
@@ -35,6 +36,30 @@ body.dark-theme {
         "wdth" 100;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
 body {
     font-family: 'Codec Pro', sans-serif;
     background: linear-gradient(var(--bg-color), var(--bg-color-2));
@@ -53,6 +78,18 @@ body {
 body.dark-theme .navbar {
     background-color: rgba(36, 32, 31, 0.5);
     border-bottom-color: var(--button-bg);
+}
+
+
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+a:hover {
+    color: var(--button-bg);
 }
 
 .circle {
@@ -106,24 +143,12 @@ body.dark-theme .navbar {
     margin-left: 1.5rem;
 }
 
-.nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color 0.15s;
-}
-
-.nav-links a:hover {
-    color: var(--button-bg);
-}
 
 .container {
     min-height: calc(100vh - 60px - 4rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.container {
     max-width: 600px;
     width: 100%;
     padding: 20px;
@@ -181,13 +206,23 @@ body.dark-theme .navbar {
     border: 1px solid var(--button-bg);
     box-shadow: 0 8px 17px rgba(0, 0, 0, 0);
     color: var(--text-color);
-    padding: 12px 24px;
+    padding: 12px 24px 12px 48px;
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.15s ease;
     font-size: 16px;
     letter-spacing: 1px;
     width: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.button .material-symbols-rounded {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
 }
 
 .accent {
@@ -205,18 +240,6 @@ body.dark-theme .navbar {
     background-color: #6d5c55;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .fade-in-button {
     opacity: 0;
     animation: fadeIn 0.5s ease forwards;
@@ -232,9 +255,91 @@ body.dark-theme .navbar {
     animation: fadeIn 0.5s ease;
 }
 
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    text-align: left;
+    border: 1px solid var(--button-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+body.dark-theme .faq-item {
+    background-color: rgba(48, 43, 42, 0.2);
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-theme .faq-question {
+    background-color: rgba(48, 43, 42, 0.2);
+}
+
+body.dark-theme .faq-question:hover {
+    background-color: var(--button-hover);
+}
+
+.faq-question:hover {
+    background-color: var(--button-hover);
+}
+
+.faq-question .material-symbols-rounded {
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, height 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-theme .faq-answer {
+    background-color: rgba(48, 43, 42, 0.2);
+}
+
+.faq-answer-content {
+    padding: 0 20px 20px;
+}
+
+.faq-item.active .faq-question {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.faq-item.active .faq-question .material-symbols-rounded {
+    transform: rotate(45deg);
+}
+
+.faq-item.active .faq-answer {
+    transform: scaleY(1);
+    opacity: 1;
+    height: auto;
+}
+
 @media (max-width: 600px) {
     body {
         font-size: 14px;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .logo {
@@ -268,7 +373,15 @@ body.dark-theme .navbar {
 
     .button {
         font-size: 14px;
-        padding: 10px 20px;
+        padding: 32px 10px 10px;
+        text-align: center;
+    }
+
+    .button .material-symbols-rounded {
+        left: 50%;
+        top: 8px;
+        transform: translateX(-50%);
+        font-size: 24px;
     }
 
     .nav-container {
@@ -279,5 +392,25 @@ body.dark-theme .navbar {
 
     .nav-links li {
         margin-inline: 1rem;
+    }
+
+    .circle {
+        display: none;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    .faq-container {
+        padding: 10px;
+    }
+
+    .faq-question {
+        padding: 15px;
+    }
+
+    .faq-item.active .faq-answer {
+        padding: 15px;
     }
 }
