@@ -15,95 +15,97 @@
     />
   </head>
   <body class="dark-theme">
-    <div class="circle"></div>
-    <nav class="navbar">
-      <div class="nav-container">
-        <a
-          href="/"
-          class="logo fredoka-medium"
-          draggable="false"
-          style="user-select: none"
-          ><img
-            src="/img/av.png"
-            style="height: 1.5rem; transform: translateY(0.2rem)"
+    <div>
+      <div class="circle"></div>
+      <nav class="navbar">
+        <div class="nav-container">
+          <a
+            href="/"
+            class="logo fredoka-medium"
             draggable="false"
-          />
-          Stoicism</a
-        >
-        <ul class="nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="#">Stats</a></li>
-          <li><a href="#">Tools</a></li>
-          <li><a href="#">Community</a></li>
-          <li>
-            <div class="mode-toggle" id="modeToggle">
-              <a>
-                <span id="modeIcon" class="material-symbols-rounded"
-                  >light_mode</span
-                ></a
-              >
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+            style="user-select: none"
+            ><img
+              src="/img/av.png"
+              style="height: 1.5rem; transform: translateY(0.2rem)"
+              draggable="false"
+            />
+            Stoicism</a
+          >
+          <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="#">Tools</a></li>
+            <li><a href="#">Community</a></li>
+            <li>
+              <div class="mode-toggle" id="modeToggle">
+                <a>
+                  <span id="modeIcon" class="material-symbols-rounded"
+                    >light_mode</span
+                  ></a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <div class="container">
-      <div class="fade-in">
-        <span class="title">
-          <img src="/img/av.png" draggable="false" />
-          <h1 class="fredoka-medium">Stoicism</h1>
-        </span>
-        <div class="stats fade-in-button" style="--delay: 0.1s">
-          The <strong>bloody rival</strong> bot that's free for everyone,
-          always.
+      <div class="container">
+        <div class="fade-in">
+          <span class="title">
+            <img src="/img/av.png" draggable="false" />
+            <h1 class="fredoka-medium">Stoicism</h1>
+          </span>
+          <div class="stats fade-in-button" style="--delay: 0.1s">
+            The <strong>bloody rival</strong> bot that's free for everyone,
+            always.
+          </div>
+        </div>
+
+        <div class="buttons-grid">
+          <button class="button accent fade-in-button" style="--delay: 0.5s">
+            <span class="material-symbols-rounded">add</span>Invite
+          </button>
+          <button class="button fade-in-button" style="--delay: 0.55s">
+            <span class="material-symbols-rounded">code</span>Commands
+          </button>
+          <a href="/faq">
+            <button class="button fade-in-button" style="--delay: 0.6s">
+              <span class="material-symbols-rounded">help</span>FAQ
+            </button></a
+          >
+          <button class="button fade-in-button" style="--delay: 0.65s">
+            <span class="material-symbols-rounded">description</span>Docs
+          </button>
+          <button class="button fade-in-button" style="--delay: 0.7s">
+            <span class="material-symbols-rounded">support</span>Support
+          </button>
+          <button class="button fade-in-button" style="--delay: 0.75s">
+            <span class="material-symbols-rounded">monitor_heart</span>Status
+          </button>
         </div>
       </div>
-
-      <div class="buttons-grid">
-        <button class="button accent fade-in-button" style="--delay: 0.5s">
-          <span class="material-symbols-rounded">add</span>Invite
-        </button>
-        <button class="button fade-in-button" style="--delay: 0.55s">
-          <span class="material-symbols-rounded">code</span>Commands
-        </button>
-        <a href="/faq">
-          <button class="button fade-in-button" style="--delay: 0.6s">
-            <span class="material-symbols-rounded">help</span>FAQ
-          </button></a
+      <footer>
+        &copy; 2024 Stoicism. All rights reserved.<br /><a href="/terms"
+          ><span
+            class="material-symbols-rounded"
+            style="font-size: 14px; transform: translateY(2px)"
+          >
+            gavel
+          </span>
+          Terms</a
         >
-        <button class="button fade-in-button" style="--delay: 0.65s">
-          <span class="material-symbols-rounded">description</span>Docs
-        </button>
-        <button class="button fade-in-button" style="--delay: 0.7s">
-          <span class="material-symbols-rounded">support</span>Support
-        </button>
-        <button class="button fade-in-button" style="--delay: 0.75s">
-          <span class="material-symbols-rounded">monitor_heart</span>Status
-        </button>
-      </div>
+        &middot;
+        <a href="/privacy"
+          ><span
+            class="material-symbols-rounded"
+            style="font-size: 14px; transform: translateY(2px)"
+          >
+            lock
+          </span>
+          Privacy</a
+        >
+      </footer>
     </div>
-    <footer style="position: absolute; bottom: 20px; overflow: hidden">
-      &copy; 2024 Stoicism. All rights reserved.<br /><a href="/terms"
-        ><span
-          class="material-symbols-rounded"
-          style="font-size: 14px; transform: translateY(2px)"
-        >
-          gavel
-        </span>
-        Terms</a
-      >
-      &middot;
-      <a href="/privacy"
-        ><span
-          class="material-symbols-rounded"
-          style="font-size: 14px; transform: translateY(2px)"
-        >
-          lock
-        </span>
-        Privacy</a
-      >
-    </footer>
   </body>
   <script src="script.js"></script>
 </html>
