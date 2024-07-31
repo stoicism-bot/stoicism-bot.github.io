@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stoicism - Discord Bot</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./commands.css" />
+    <script src="commands.js"></script>
+  </head>
+  <body class="dark-theme">
+    <div>
+      <div class="circle"></div>
+
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="/" class="logo fredoka-medium">
+            <img
+              src="../img/av.png"
+              alt="Stoicism"
+              style="height: 1.5rem; transform: translateY(0.2rem)"
+              draggable="false"
+            />
+            Stoicism
+          </a>
+          <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="#">Tools</a></li>
+            <li><a href="#">Community</a></li>
+            <li>
+              <div id="modeToggle" class="mode-toggle">
+                <span id="modeIcon" class="material-symbols-rounded"
+                  >light_mode</span
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div style="margin-top: 100px"></div>
+
+      <div class="container" style="max-width: 1200px">
+        <h1 class="fredoka-medium">Stoicism - Command list</h1>
+        <div id="commandsContainer"></div>
+      </div>
+      <button
+        id="backToTopBtn"
+        class="back-to-top-button"
+        onclick="scrollToTop()"
+      >
+        <span class="material-symbols-rounded" style="font-size: 30px"
+          >arrow_upward</span
+        >
+      </button>
+      <footer>
+        <p>© 2024 Stoicism. All rights reserved.</p>
+        <p>
+          <a href="/legal/terms">
+            <span
+              class="material-symbols-rounded"
+              style="font-size: 14px; transform: translateY(2px)"
+              >gavel</span
+            >
+            Terms
+          </a>
+          ·
+          <a href="/legal/privacy">
+            <span
+              class="material-symbols-rounded"
+              style="font-size: 14px; transform: translateY(2px)"
+              >lock</span
+            >
+            Privacy
+          </a>
+          ·
+          <a href="/legal/refunds">
+            <span
+              class="material-symbols-rounded"
+              style="font-size: 14px; transform: translateY(2px)"
+              >local_mall</span
+            >
+            Refunds
+          </a>
+        </p>
+      </footer>
+    </div>
+  </body>
+  <script src="/script.js"></script>
+</html>
