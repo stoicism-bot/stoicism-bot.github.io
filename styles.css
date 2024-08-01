@@ -371,7 +371,8 @@ body.dark-theme .faq-answer {
     }
 
     .container {
-        padding: 10%;
+        padding: 1rem;
+        max-width: 100%;
     }
 
     .title h1 {

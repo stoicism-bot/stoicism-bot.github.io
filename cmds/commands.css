@@ -32,24 +32,24 @@
 }
 
 .command-header {
-    background-color: var(--button-bg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1rem;
+    padding-inline: 1rem;
+    padding-top: 1rem;
 }
 
 .command-card h3 {
     font-size: 1.2rem;
     margin: 0;
-    color: var(--button-text);
+    color: var(--text-color);
 }
 
 .copy-button {
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--button-text);
+    color: var(--text-color);
     transition: opacity 0.3s ease;
 }
 
@@ -65,79 +65,26 @@
 }
 
 .command-details {
-    padding-inline: 1rem;
-    padding-bottom: 0.5rem;
+    padding-block: 1rem;
+    border-top: 1px solid var(--button-bg);
     font-size: 0.8rem;
     color: var(--text-color-2);
 }
-
 
 .command-details strong {
     color: var(--text-color);
 }
 
-.back-to-top-button {
-    position: fixed;
-    bottom: -70px;
-    right: 70px;
-    z-index: 100;
-    width: 70px;
-    height: 70px;
-    outline: none;
-    background-color: var(--bg-color);
-    border: 1px solid var(--button-bg);
-    color: var(--text-color);
-    cursor: pointer;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: bottom 0.3s, background-color 0.2s ease;
+
+.command-details p {
+    padding-block: 0.2rem !important;
+    line-height: 1.7rem;
 }
 
-.back-to-top-button:hover {
-    background-color: var(--button-bg);
-}
-
-.back-to-top-button.show {
-    bottom: 70px;
-}
-
-
-@media (max-width: 1200px) {
-    .commands-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
-    .commands-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .container {
-        padding: 0;
-    }
-
-    .commands-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .back-to-top-button {
-        right: 50%;
-        transform: translateX(50%);
-    }
-
-    .search-container {
-        max-width: 80%;
-        width: 100%;
-    }
-}
-
-.command-category {
-    margin-bottom: 2.5rem;
+code {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0.3rem;
+    border-radius: 10px;
 }
 
 .search-container {
@@ -186,4 +133,159 @@
 
 body.dark-theme #searchButton:hover {
     color: var(--text-color);
+}
+
+
+#categorySelector {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.category-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--bg-color-2);
+    border: 1px solid var(--button-bg);
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+h2 {
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--button-bg);
+    border-radius: 15px;
+    color: var(--text-color) !important;
+}
+
+.category-button .command-count {
+    position: absolute;
+    left: 0.25rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-button .category-name {
+    flex-grow: 1;
+    text-align: center;
+    padding: 0 0.5rem 0 2rem;
+}
+
+.category-button:hover,
+.category-button.active {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.category-button:hover .command-count,
+.category-button.active .command-count {
+    background-color: var(--button-text);
+    color: var(--button-bg);
+}
+
+.commands-grid {
+    display: grid;
+    width: 1160px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.command-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.command-card p {
+    flex-grow: 1;
+    padding: 1rem;
+    margin: 0;
+}
+
+.back-to-top-button {
+    position: fixed;
+    bottom: -70px;
+    right: 70px;
+    z-index: 100;
+    width: 70px;
+    height: 70px;
+    outline: none;
+    background-color: var(--bg-color);
+    border: 1px solid var(--button-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: bottom 0.3s, background-color 0.2s ease;
+}
+
+.back-to-top-button:hover {
+    background-color: var(--button-bg);
+}
+
+.back-to-top-button.show {
+    bottom: 70px;
+}
+
+@media (max-width: 1200px) {
+    .commands-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .commands-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    #categorySelector {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .category-button {
+        width: 100%;
+    }
+
+    .category-button .command-count {
+        left: 0.35rem;
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+    }
+
+    .category-button .category-name {
+        font-size: 0.9rem;
+    }
+
+    .commands-grid {
+        grid-template-columns: 1fr;
+        width: unset;
+    }
+
+    .command-card {
+        width: 375px;
+    }
+
+    .back-to-top-button {
+        right: 50%;
+        transform: translateX(50%);
+    }
 }

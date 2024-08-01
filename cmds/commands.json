@@ -72,18 +72,6 @@
       }
     }
   },
-  "EmoteStickerExtractor": {
-    "extractemotes": {
-      "description": "No description provided",
-      "permissions": [],
-      "arguments": []
-    },
-    "extractstickers": {
-      "description": "No description provided",
-      "permissions": [],
-      "arguments": []
-    }
-  },
   "Fun": {
     "choose": {
       "description": "Picks between choices separated by a comma.",
@@ -202,6 +190,16 @@
       ]
     },
     "bio": {
+      "description": "No description provided",
+      "permissions": [],
+      "arguments": []
+    },
+    "extractemotes": {
+      "description": "No description provided",
+      "permissions": [],
+      "arguments": []
+    },
+    "extractstickers": {
       "description": "No description provided",
       "permissions": [],
       "arguments": []

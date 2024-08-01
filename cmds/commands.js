@@ -6,16 +6,24 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((response) => response.json())
     .then((data) => {
       const commandsContainer = document.getElementById("commandsContainer");
+      const categorySelector = document.getElementById("categorySelector");
+
+      const allCategoryButton = createCategoryButton("All", 0);
+      allCategoryButton.addEventListener("click", () => showCategory("All"));
+      categorySelector.appendChild(allCategoryButton);
+
+      let totalCommands = 0;
 
       for (const [category, commands] of Object.entries(data)) {
         const categoryElement = document.createElement("div");
         categoryElement.className = "command-category";
-        categoryElement.innerHTML = `<h1 class="fredoka-medium fade-in-button" style="--delay: 0.1s">${category}</h1>`;
+        categoryElement.dataset.category = category;
 
         const commandsGrid = document.createElement("div");
         commandsGrid.className = "commands-grid";
 
         let categoryCommands = [];
+        let categoryCommandCount = 0;
 
         for (const [commandName, commandInfo] of Object.entries(commands)) {
           const commandCard = createCommandCard(commandName, commandInfo);
@@ -25,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             info: commandInfo,
             element: commandCard,
           });
+          categoryCommandCount++;
 
           if (commandInfo.subcommands) {
             for (const [subName, subInfo] of Object.entries(
@@ -38,23 +47,69 @@ document.addEventListener("DOMContentLoaded", () => {
                 info: subInfo,
                 element: subCommandCard,
               });
+              categoryCommandCount++;
             }
           }
         }
 
-        commandsContainer.appendChild(categoryElement);
+        totalCommands += categoryCommandCount;
         categoryElement.appendChild(commandsGrid);
+        commandsContainer.appendChild(categoryElement);
 
         allCommands.push(...categoryCommands);
         categories.push({
+          name: category,
           element: categoryElement,
           commands: categoryCommands,
         });
+
+        const categoryButton = createCategoryButton(
+          category,
+          categoryCommandCount
+        );
+        categoryButton.addEventListener("click", () => showCategory(category));
+        categorySelector.appendChild(categoryButton);
       }
 
+      updateCategoryButtonCount(allCategoryButton, totalCommands);
+
       setupSearch();
+      showCategory(categories[0].name);
     })
     .catch((error) => console.error("Error loading commands:", error));
+
+  function createCategoryButton(name, count) {
+    const button = document.createElement("button");
+    button.className = "category-button fade-in";
+    button.innerHTML = `
+      <span class="command-count">${count}</span>
+      <span class="category-name">${name}</span>
+    `;
+    return button;
+  }
+
+  function updateCategoryButtonCount(button, count) {
+    button.querySelector(".command-count").textContent = count;
+  }
+
+  function showCategory(categoryName) {
+    if (categoryName === "All") {
+      categories.forEach((category) => {
+        category.element.style.display = "block";
+      });
+    } else {
+      categories.forEach((category) => {
+        category.element.style.display =
+          category.name === categoryName ? "block" : "none";
+      });
+    }
+    document.querySelectorAll(".category-button").forEach((button) => {
+      button.classList.toggle(
+        "active",
+        button.querySelector(".category-name").textContent === categoryName
+      );
+    });
+  }
 
   function setupSearch() {
     const searchInput = document.getElementById("searchInput");
@@ -63,19 +118,43 @@ document.addEventListener("DOMContentLoaded", () => {
     function performSearch() {
       const searchTerm = searchInput.value.toLowerCase().trim();
 
-      allCommands.forEach(({ name, info, element }) => {
-        const matches =
-          searchTerm === "" ||
-          name.toLowerCase().includes(searchTerm) ||
-          info.description.toLowerCase().includes(searchTerm);
-        element.style.display = matches ? "" : "none";
-      });
+      let visibleCommandsCount = 0;
 
       categories.forEach((category) => {
-        const hasVisibleCommands = category.commands.some(
-          (cmd) => cmd.element.style.display !== "none"
+        let categoryVisibleCount = 0;
+
+        category.commands.forEach(({ name, info, element }) => {
+          const matches =
+            searchTerm === "" ||
+            name.toLowerCase().includes(searchTerm) ||
+            info.description.toLowerCase().includes(searchTerm);
+          element.style.display = matches ? "" : "none";
+          if (matches) {
+            categoryVisibleCount++;
+            visibleCommandsCount++;
+          }
+        });
+
+        category.element.style.display =
+          categoryVisibleCount > 0 ? "block" : "none";
+        updateCategoryButtonCount(
+          document.querySelector(
+            `.category-button:nth-child(${categories.indexOf(category) + 2})`
+          ),
+          categoryVisibleCount
         );
-        category.element.style.display = hasVisibleCommands ? "" : "none";
+      });
+
+      updateCategoryButtonCount(
+        document.querySelector(".category-button:first-child"),
+        visibleCommandsCount
+      );
+
+      document.querySelectorAll(".category-button").forEach((button) => {
+        button.classList.toggle(
+          "active",
+          button === document.querySelector(".category-button:first-child")
+        );
       });
     }
 
@@ -86,126 +165,46 @@ document.addEventListener("DOMContentLoaded", () => {
         performSearch();
       }
     });
-
-    document.addEventListener("keydown", (event) => {
-      if ((event.ctrlKey || event.metaKey) && event.key === "k") {
-        event.preventDefault();
-        searchInput.focus();
-        searchInput.select();
-      }
-    });
-
-    performSearch();
   }
 });
 
 function createCommandCard(name, info) {
   const card = document.createElement("div");
   card.className = "command-card fade-in-button";
-  card.style = "--delay: 0.3s";
+  card.style = "--delay: 0.1s";
 
   card.innerHTML = `
-      <div class="command-header">
-        <h3>${name}</h3>
-        <button class="copy-button" onclick="copyCommand('${name}')">
-          <span class="material-symbols-rounded">content_copy</span>
-        </button>
-      </div>
-      <p>${info.description}</p>
-      <div class="command-details">
-        ${createArgumentsString(info.arguments)}
-        ${createPermissionsString(info.permissions)}
-      </div>
-    `;
+    <div class="command-header">
+      <h3>${name}</h3>
+      <button class="copy-button" onclick="copyCommand('${name}')">
+        <span class="material-symbols-rounded">content_copy</span>
+      </button>
+    </div>
+    <p>${info.description}</p>
+    <div class="command-details">
+      ${createArgumentsString(info.arguments)}
+      ${createPermissionsString(info.permissions)}
+    </div>
+  `;
 
   return card;
 }
-
 function createArgumentsString(args) {
   if (!args || args.length === 0)
-    return "<p><strong>Arguments</strong><br>None</p>";
+    return "<p><strong>Arguments<br> </strong> <code>None</code></p>";
 
-  const argsList = args
-    .map(
-      (arg) =>
-        `${arg.name}${arg.required ? "*" : ""}${
-          arg.default ? `=${arg.default}` : ""
-        }`
-    )
-    .join(", ");
+  const argsList = args.map((arg) => `<code>${arg.name}</code>`).join(" ");
 
-  return `<p><strong>Arguments</strong><br>${argsList}</p>`;
+  return `<p><strong>Arguments<br> </strong> ${argsList}</p>`;
 }
 
 function createPermissionsString(permissions) {
   if (!permissions || permissions.length === 0)
-    return "<p><strong>Permissions</strong><br>None</p>";
+    return "<p><strong>Permissions<br> </strong> <code>None</code></p>";
 
-  return `<p><strong>Permissions</strong><br>${permissions.join(", ")}</p>`;
-}
-
-function copyCommand(commandName) {
-  navigator.clipboard
-    .writeText(commandName)
-    .then(() => {
-      const copyButton = document.querySelector(
-        `[onclick="copyCommand('${commandName}')"]`
-      );
-      const originalIcon = copyButton.innerHTML;
-      copyButton.innerHTML =
-        '<span class="material-symbols-rounded">check</span>';
-      setTimeout(() => {
-        copyButton.innerHTML = originalIcon;
-      }, 2000);
-    })
-    .catch((err) => {
-      console.error("Failed to copy command: ", err);
-    });
-}
-
-function createCommandCard(name, info) {
-  const card = document.createElement("div");
-  card.className = "command-card fade-in-button";
-  card.style = "--delay: 0.3s";
-
-  card.innerHTML = `
-      <div class="command-header">
-        <h3>${name}</h3>
-        <button class="copy-button" onclick="copyCommand('${name}')">
-          <span class="material-symbols-rounded">content_copy</span>
-        </button>
-      </div>
-      <p>${info.description}</p>
-      <div class="command-details">
-        ${createArgumentsString(info.arguments)}
-        ${createPermissionsString(info.permissions)}
-      </div>
-    `;
-
-  return card;
-}
-
-function createArgumentsString(args) {
-  if (!args || args.length === 0)
-    return "<p><strong>Arguments</strong><br>None</p>";
-
-  const argsList = args
-    .map(
-      (arg) =>
-        `${arg.name}${arg.required ? "*" : ""}${
-          arg.default ? `=${arg.default}` : ""
-        }`
-    )
-    .join(", ");
-
-  return `<p><strong>Arguments</strong><br>${argsList}</p>`;
-}
-
-function createPermissionsString(permissions) {
-  if (!permissions || permissions.length === 0)
-    return "<p><strong>Permissions</strong><br>None</p>";
-
-  return `<p><strong>Permissions</strong><br>${permissions.join(", ")}</p>`;
+  return `<p><strong>Permissions<br> </strong> <code>${permissions.join(
+    ", "
+  )}</code></p>`;
 }
 
 function copyCommand(commandName) {
