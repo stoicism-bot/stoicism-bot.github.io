@@ -80,7 +80,30 @@ body.dark-theme .navbar {
     border-bottom-color: var(--button-bg);
 }
 
+* {
+    scrollbar-color: var(--button-bg) transparent;
+}
 
+::-webkit-scrollbar {
+    width: auto;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--button-bg);
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+@supports (scrollbar-width: auto) {
+    * {
+        scrollbar-width: auto;
+    }
+}
 
 a {
     color: var(--text-color);
@@ -103,6 +126,7 @@ a:hover {
     left: calc(var(--circle-size) / 2 * -1);
     pointer-events: none;
     opacity: 0.3;
+    z-index: -1;
 }
 
 .navbar {

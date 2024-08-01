@@ -3,73 +3,7 @@
     "alias": {
       "description": "Manage command aliases",
       "permissions": [],
-      "arguments": [],
-      "subcommands": {
-        "removeall": {
-          "description": "Remove all aliases for a command",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "command",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "add": {
-          "description": "Create an alias for a command",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "alias",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "command",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "reset": {
-          "description": "Remove all aliases for this server",
-          "permissions": [],
-          "arguments": []
-        },
-        "list": {
-          "description": "List all aliases for this server",
-          "permissions": [],
-          "arguments": []
-        },
-        "view": {
-          "description": "View command execution for alias",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "alias",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "remove": {
-          "description": "Remove an alias",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "alias",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        }
-      }
+      "arguments": []
     }
   },
   "EmoteStickerExtractor": {
@@ -92,7 +26,7 @@
         {
           "name": "choices",
           "description": "No description provided",
-
+          "default": null,
           "required": true
         }
       ]
@@ -128,7 +62,7 @@
         {
           "name": "user1",
           "description": "No description provided",
-
+          "default": null,
           "required": true
         },
         {
@@ -149,14 +83,7 @@
     "membercount": {
       "description": "No description provided",
       "permissions": [],
-      "arguments": [],
-      "subcommands": {
-        "all": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": []
-        }
-      }
+      "arguments": []
     },
     "firstmsg": {
       "description": "No description provided",
@@ -173,21 +100,7 @@
           "default": "None",
           "required": false
         }
-      ],
-      "subcommands": {
-        "guild": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "user",
-              "description": "No description provided",
-              "default": "None",
-              "required": false
-            }
-          ]
-        }
-      }
+      ]
     },
     "userinfo": {
       "description": "Displays basic user info",
@@ -211,101 +124,14 @@
     "levels": {
       "description": "View and manage levels",
       "permissions": [],
-      "arguments": [],
-      "subcommands": {
-        "unlock": {
-          "description": "Enable leveling system",
-          "permissions": [],
-          "arguments": []
-        },
-        "rank": {
-          "description": "View your rank and XP progress",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "member",
-              "description": "No description provided",
-              "default": "None",
-              "required": false
-            }
-          ]
-        },
-        "lock": {
-          "description": "Disable leveling system",
-          "permissions": [],
-          "arguments": []
-        },
-        "addxp": {
-          "description": "Add or remove XP from a user",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "member",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "amount",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "leaderboard": {
-          "description": "Shows the top 100 users.",
-          "permissions": [],
-          "arguments": []
-        },
-        "addlvl": {
-          "description": "Add or remove levels from a user",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "member",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "amount",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "messages": {
-          "description": "Toggle level up messages for yourself in this server",
-          "permissions": [],
-          "arguments": []
-        },
-        "reset": {
-          "description": "Reset all members level and XP",
-          "permissions": [],
-          "arguments": []
-        }
-      }
+      "arguments": []
     }
   },
   "Moderation": {
     "thread": {
       "description": "Thread management commands",
       "permissions": [],
-      "arguments": [],
-      "subcommands": {
-        "unlock": {
-          "description": "Unlocks the current thread",
-          "permissions": [],
-          "arguments": []
-        },
-        "lock": {
-          "description": "Locks the current thread",
-          "permissions": [],
-          "arguments": []
-        }
-      }
+      "arguments": []
     },
     "purge": {
       "description": "explod",
@@ -317,69 +143,7 @@
           "default": "None",
           "required": false
         }
-      ],
-      "subcommands": {
-        "bots": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "limit",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "startswith": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "keyword",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "limit",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "images": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "limit",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "endswith": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "keyword",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "limit",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        }
-      }
+      ]
     },
     "pin": {
       "description": "No description provided",
@@ -412,7 +176,7 @@
         {
           "name": "member",
           "description": "No description provided",
-
+          "default": null,
           "required": true
         },
         {
@@ -430,7 +194,7 @@
         {
           "name": "members",
           "description": "No description provided",
-
+          "default": null,
           "required": true
         },
         {
@@ -446,43 +210,7 @@
     "prefix": {
       "description": "Set custom prefixes for the bot",
       "permissions": [],
-      "arguments": [],
-      "subcommands": {
-        "self": {
-          "description": "Set or remove your personal prefix",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "new_prefix",
-              "description": "No description provided",
-              "default": "None",
-              "required": false
-            }
-          ]
-        },
-        "view": {
-          "description": "View current prefix",
-          "permissions": [],
-          "arguments": []
-        },
-        "remove": {
-          "description": "Remove the custom prefix for the server",
-          "permissions": [],
-          "arguments": []
-        },
-        "set": {
-          "description": "Set a custom prefix for the server",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "new_prefix",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        }
-      }
+      "arguments": []
     }
   },
   "Tags": {
@@ -493,84 +221,24 @@
         {
           "name": "tag_name",
           "description": "No description provided",
-
+          "default": null,
           "required": true
         }
-      ],
-      "subcommands": {
-        "list": {
+      ]
+    }
+  },
+  "No Category": {
+    "help": {
+      "description": "No description provided",
+      "permissions": [],
+      "arguments": [
+        {
+          "name": "command",
           "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "user",
-              "description": "No description provided",
-              "default": "None",
-              "required": false
-            }
-          ]
-        },
-        "info": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "tag_name",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "create": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "tag_name",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "description",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "delete": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "tag_name",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "rename": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "old_name",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "new_name",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
+          "default": "None",
+          "required": false
         }
-      }
+      ]
     }
   }
 }
