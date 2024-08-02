@@ -116,6 +116,11 @@ code {
     transition: all 0.3s ease;
 }
 
+::placeholder,
+::-ms-input-placeholder {
+    color: var(--text-color);
+}
+
 .search-container:hover #searchInput,
 .search-container:hover #searchButton,
 .search-container:focus-within #searchInput,
@@ -128,6 +133,12 @@ code {
     background-color: var(--button-bg);
     color: var(--button-text);
     border-color: var(--button-bg);
+}
+
+.search-container:focus-within ::-ms-input-placeholder,
+.search-container:focus-within ::placeholder {
+    color: var(--text-color);
+    opacity: 1;
 }
 
 #searchButton {
@@ -298,6 +309,7 @@ h2 {
         overflow: hidden;
         padding: 1rem;
     }
+
 
     .back-to-top-button {
         background-color: transparent;
