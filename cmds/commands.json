@@ -1,49 +1,56 @@
 {
-  "AliasManager": {
+  "Server": {
     "alias": {
       "description": "Manage command aliases",
       "permissions": [],
       "arguments": [],
       "subcommands": {
-        "removeall": {
-          "description": "Remove all aliases for a command",
-          "permissions": [],
+        "reset": {
+          "description": "Remove all aliases for this server",
+          "permissions": ["manage guild"],
+          "arguments": []
+        },
+        "remove": {
+          "description": "Remove an alias",
+          "permissions": ["manage guild"],
           "arguments": [
             {
-              "name": "command",
+              "name": "alias",
               "description": "No description provided",
-
+              "default": null,
               "required": true
             }
           ]
         },
         "add": {
           "description": "Create an alias for a command",
-          "permissions": [],
+          "permissions": ["manage guild"],
           "arguments": [
             {
               "name": "alias",
               "description": "No description provided",
-
+              "default": null,
               "required": true
             },
             {
               "name": "command",
               "description": "No description provided",
-
+              "default": null,
               "required": true
             }
           ]
         },
-        "reset": {
-          "description": "Remove all aliases for this server",
-          "permissions": [],
-          "arguments": []
-        },
-        "list": {
-          "description": "List all aliases for this server",
-          "permissions": [],
-          "arguments": []
+        "removeall": {
+          "description": "Remove all aliases for a command",
+          "permissions": ["manage guild"],
+          "arguments": [
+            {
+              "name": "command",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
         },
         "view": {
           "description": "View command execution for alias",
@@ -52,24 +59,221 @@
             {
               "name": "alias",
               "description": "No description provided",
-
+              "default": null,
               "required": true
             }
           ]
         },
-        "remove": {
-          "description": "Remove an alias",
+        "list": {
+          "description": "List all aliases for this server",
+          "permissions": [],
+          "arguments": []
+        }
+      }
+    },
+    "prefix": {
+      "description": "Set custom prefixes for the bot",
+      "permissions": [],
+      "arguments": [],
+      "subcommands": {
+        "set": {
+          "description": "Set a custom prefix for the server",
+          "permissions": ["manage guild"],
+          "arguments": [
+            {
+              "name": "new prefix",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "view": {
+          "description": "View current prefix",
+          "permissions": [],
+          "arguments": []
+        },
+        "self": {
+          "description": "Set or remove your personal prefix",
           "permissions": [],
           "arguments": [
             {
-              "name": "alias",
+              "name": "new prefix",
               "description": "No description provided",
-
+              "default": "None",
+              "required": false
+            }
+          ]
+        },
+        "remove": {
+          "description": "Remove the custom prefix for the server",
+          "permissions": ["manage guild"],
+          "arguments": []
+        }
+      }
+    },
+    "extractemotes": {
+      "description": "No description provided",
+      "permissions": ["manage emojis"],
+      "arguments": []
+    },
+    "extractstickers": {
+      "description": "No description provided",
+      "permissions": ["manage emojis"],
+      "arguments": []
+    }
+  },
+  "Moderation": {
+    "thread": {
+      "description": "Thread management commands",
+      "permissions": [],
+      "arguments": [],
+      "subcommands": {
+        "lock": {
+          "description": "Locks the current thread",
+          "permissions": ["manage threads"],
+          "arguments": []
+        },
+        "unlock": {
+          "description": "Unlocks the current thread",
+          "permissions": ["manage threads"],
+          "arguments": []
+        }
+      }
+    },
+    "purge": {
+      "description": "explod",
+      "permissions": ["manage messages"],
+      "arguments": [
+        {
+          "name": "args",
+          "description": "No description provided",
+          "default": "None",
+          "required": false
+        }
+      ],
+      "subcommands": {
+        "startswith": {
+          "description": "Only deletes messages starting with a word",
+          "permissions": ["manage messages"],
+          "arguments": [
+            {
+              "name": "keyword",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            },
+            {
+              "name": "limit",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "images": {
+          "description": "Only deletes messages with attachments",
+          "permissions": ["manage messages"],
+          "arguments": [
+            {
+              "name": "limit",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "endswith": {
+          "description": "Only removes messages ending with a word",
+          "permissions": ["manage messages"],
+          "arguments": [
+            {
+              "name": "keyword",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            },
+            {
+              "name": "limit",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "bots": {
+          "description": "Only removes messages by bots",
+          "permissions": ["manage messages"],
+          "arguments": [
+            {
+              "name": "limit",
+              "description": "No description provided",
+              "default": null,
               "required": true
             }
           ]
         }
       }
+    },
+    "pin": {
+      "description": "Pins the last message / message you reply to",
+      "permissions": ["manage messages"],
+      "arguments": [
+        {
+          "name": "message",
+          "description": "No description provided",
+          "default": "None",
+          "required": false
+        }
+      ]
+    },
+    "unpin": {
+      "description": "Unins the last message / message you reply to",
+      "permissions": ["manage messages"],
+      "arguments": [
+        {
+          "name": "message",
+          "description": "No description provided",
+          "default": "None",
+          "required": false
+        }
+      ]
+    },
+    "ban": {
+      "description": "Bans a member",
+      "permissions": ["ban members"],
+      "arguments": [
+        {
+          "name": "member",
+          "description": "No description provided",
+          "default": null,
+          "required": true
+        },
+        {
+          "name": "reason",
+          "description": "No description provided",
+          "default": "None",
+          "required": false
+        }
+      ]
+    },
+    "bulkban": {
+      "description": "Bans multiple members with the same reason",
+      "permissions": ["ban members"],
+      "arguments": [
+        {
+          "name": "members",
+          "description": "No description provided",
+          "default": null,
+          "required": true
+        },
+        {
+          "name": "reason",
+          "description": "No description provided",
+          "default": "None",
+          "required": false
+        }
+      ]
     }
   },
   "Fun": {
@@ -80,7 +284,7 @@
         {
           "name": "choices",
           "description": "No description provided",
-
+          "default": null,
           "required": true
         }
       ]
@@ -116,7 +320,7 @@
         {
           "name": "user1",
           "description": "No description provided",
-
+          "default": null,
           "required": true
         },
         {
@@ -126,16 +330,184 @@
           "required": false
         }
       ]
+    },
+    "tag": {
+      "description": "Call a tag from your server",
+      "permissions": [],
+      "arguments": [
+        {
+          "name": "tag name",
+          "description": "No description provided",
+          "default": null,
+          "required": true
+        }
+      ],
+      "subcommands": {
+        "delete": {
+          "description": "Removes a tag",
+          "permissions": [],
+          "arguments": [
+            {
+              "name": "tag name",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "rename": {
+          "description": "Renames a tag",
+          "permissions": [],
+          "arguments": [
+            {
+              "name": "old name",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            },
+            {
+              "name": "new name",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "list": {
+          "description": "Shows all tags in your server",
+          "permissions": [],
+          "arguments": [
+            {
+              "name": "user",
+              "description": "No description provided",
+              "default": "None",
+              "required": false
+            }
+          ]
+        },
+        "info": {
+          "description": "Shows information about a tag",
+          "permissions": [],
+          "arguments": [
+            {
+              "name": "tag name",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "create": {
+          "description": "Creates a tag",
+          "permissions": [],
+          "arguments": [
+            {
+              "name": "tag name",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            },
+            {
+              "name": "description",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Levels": {
+    "levels": {
+      "description": "View and manage levels",
+      "permissions": [],
+      "arguments": [],
+      "subcommands": {
+        "reset": {
+          "description": "Reset all members level and XP",
+          "permissions": [],
+          "arguments": []
+        },
+        "unlock": {
+          "description": "Enable leveling system",
+          "permissions": [],
+          "arguments": []
+        },
+        "addxp": {
+          "description": "Add or remove XP from a user",
+          "permissions": [],
+          "arguments": [
+            {
+              "name": "member",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            },
+            {
+              "name": "amount",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "rank": {
+          "description": "View your rank and XP progress",
+          "permissions": [],
+          "arguments": [
+            {
+              "name": "member",
+              "description": "No description provided",
+              "default": "None",
+              "required": false
+            }
+          ]
+        },
+        "addlvl": {
+          "description": "Add or remove levels from a user",
+          "permissions": [],
+          "arguments": [
+            {
+              "name": "member",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            },
+            {
+              "name": "amount",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "lock": {
+          "description": "Disable leveling system",
+          "permissions": [],
+          "arguments": []
+        },
+        "leaderboard": {
+          "description": "Shows the top 100 users.",
+          "permissions": [],
+          "arguments": []
+        },
+        "messages": {
+          "description": "Toggle level up messages for yourself in this server",
+          "permissions": [],
+          "arguments": []
+        }
+      }
     }
   },
   "Info": {
     "ping": {
-      "description": "No description provided",
+      "description": "beep boop :3",
       "permissions": [],
       "arguments": []
     },
     "membercount": {
-      "description": "No description provided",
+      "description": "Returns the amount of members",
       "permissions": [],
       "arguments": [],
       "subcommands": {
@@ -147,12 +519,12 @@
       }
     },
     "firstmsg": {
-      "description": "No description provided",
+      "description": "Gets the first message in a channel",
       "permissions": [],
       "arguments": []
     },
     "avatar": {
-      "description": "No description provided",
+      "description": "Shows someone's avatar",
       "permissions": [],
       "arguments": [
         {
@@ -164,7 +536,7 @@
       ],
       "subcommands": {
         "guild": {
-          "description": "No description provided",
+          "description": "Shows the guild avatar if set",
           "permissions": [],
           "arguments": [
             {
@@ -190,383 +562,57 @@
       ]
     },
     "bio": {
-      "description": "No description provided",
-      "permissions": [],
-      "arguments": []
-    },
-    "extractemotes": {
-      "description": "No description provided",
-      "permissions": [],
-      "arguments": []
-    },
-    "extractstickers": {
-      "description": "No description provided",
+      "description": "Displays basic info about ME.",
       "permissions": [],
       "arguments": []
     }
   },
-  "Levels": {
-    "levels": {
-      "description": "View and manage levels",
+  "Counters": {
+    "counter": {
+      "description": "Create counters for everybody to see",
       "permissions": [],
       "arguments": [],
       "subcommands": {
-        "unlock": {
-          "description": "Enable leveling system",
-          "permissions": [],
-          "arguments": []
-        },
-        "rank": {
-          "description": "View your rank and XP progress",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "member",
-              "description": "No description provided",
-              "default": "None",
-              "required": false
-            }
-          ]
-        },
-        "lock": {
-          "description": "Disable leveling system",
-          "permissions": [],
-          "arguments": []
-        },
-        "addxp": {
-          "description": "Add or remove XP from a user",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "member",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "amount",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "leaderboard": {
-          "description": "Shows the top 100 users.",
-          "permissions": [],
-          "arguments": []
-        },
-        "addlvl": {
-          "description": "Add or remove levels from a user",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "member",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "amount",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "messages": {
-          "description": "Toggle level up messages for yourself in this server",
-          "permissions": [],
-          "arguments": []
-        },
-        "reset": {
-          "description": "Reset all members level and XP",
-          "permissions": [],
-          "arguments": []
-        }
-      }
-    }
-  },
-  "Moderation": {
-    "thread": {
-      "description": "Thread management commands",
-      "permissions": [],
-      "arguments": [],
-      "subcommands": {
-        "unlock": {
-          "description": "Unlocks the current thread",
-          "permissions": [],
-          "arguments": []
-        },
-        "lock": {
-          "description": "Locks the current thread",
-          "permissions": [],
-          "arguments": []
-        }
-      }
-    },
-    "purge": {
-      "description": "explod",
-      "permissions": [],
-      "arguments": [
-        {
-          "name": "args",
-          "description": "No description provided",
-          "default": "None",
-          "required": false
-        }
-      ],
-      "subcommands": {
-        "bots": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "limit",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "startswith": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "keyword",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "limit",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "images": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "limit",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "endswith": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "keyword",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "limit",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        }
-      }
-    },
-    "pin": {
-      "description": "No description provided",
-      "permissions": [],
-      "arguments": [
-        {
-          "name": "message",
-          "description": "No description provided",
-          "default": "None",
-          "required": false
-        }
-      ]
-    },
-    "unpin": {
-      "description": "No description provided",
-      "permissions": [],
-      "arguments": [
-        {
-          "name": "message",
-          "description": "No description provided",
-          "default": "None",
-          "required": false
-        }
-      ]
-    },
-    "ban": {
-      "description": "Bans a user",
-      "permissions": [],
-      "arguments": [
-        {
-          "name": "member",
-          "description": "No description provided",
-
-          "required": true
-        },
-        {
-          "name": "reason",
-          "description": "No description provided",
-          "default": "None",
-          "required": false
-        }
-      ]
-    },
-    "bulkban": {
-      "description": "No description provided",
-      "permissions": [],
-      "arguments": [
-        {
-          "name": "members",
-          "description": "No description provided",
-
-          "required": true
-        },
-        {
-          "name": "reason",
-          "description": "No description provided",
-          "default": "None",
-          "required": false
-        }
-      ]
-    }
-  },
-  "Prefixes": {
-    "prefix": {
-      "description": "Set custom prefixes for the bot",
-      "permissions": [],
-      "arguments": [],
-      "subcommands": {
-        "self": {
-          "description": "Set or remove your personal prefix",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "new_prefix",
-              "description": "No description provided",
-              "default": "None",
-              "required": false
-            }
-          ]
-        },
-        "view": {
-          "description": "View current prefix",
-          "permissions": [],
-          "arguments": []
-        },
         "remove": {
-          "description": "Remove the custom prefix for the server",
-          "permissions": [],
-          "arguments": []
-        },
-        "set": {
-          "description": "Set a custom prefix for the server",
-          "permissions": [],
+          "description": "Remove a channel counter",
+          "permissions": ["manage channels"],
           "arguments": [
             {
-              "name": "new_prefix",
+              "name": "counter type",
               "description": "No description provided",
-
+              "default": null,
               "required": true
-            }
-          ]
-        }
-      }
-    }
-  },
-  "Tags": {
-    "tag": {
-      "description": "No description provided",
-      "permissions": [],
-      "arguments": [
-        {
-          "name": "tag_name",
-          "description": "No description provided",
-
-          "required": true
-        }
-      ],
-      "subcommands": {
-        "list": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
+            },
             {
-              "name": "user",
+              "name": "delete / keep",
               "description": "No description provided",
-              "default": "None",
+              "default": "delete",
               "required": false
             }
           ]
         },
-        "info": {
-          "description": "No description provided",
-          "permissions": [],
+        "add": {
+          "description": "Create channel counter",
+          "permissions": ["manage channels"],
           "arguments": [
             {
-              "name": "tag_name",
+              "name": "counter type",
               "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "create": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "tag_name",
-              "description": "No description provided",
-
+              "default": null,
               "required": true
             },
             {
-              "name": "description",
+              "name": "channel type",
               "description": "No description provided",
-
+              "default": null,
               "required": true
             }
           ]
         },
-        "delete": {
-          "description": "No description provided",
+        "list": {
+          "description": "List every counter available in this server",
           "permissions": [],
-          "arguments": [
-            {
-              "name": "tag_name",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
-        },
-        "rename": {
-          "description": "No description provided",
-          "permissions": [],
-          "arguments": [
-            {
-              "name": "old_name",
-              "description": "No description provided",
-
-              "required": true
-            },
-            {
-              "name": "new_name",
-              "description": "No description provided",
-
-              "required": true
-            }
-          ]
+          "arguments": []
         }
       }
     }

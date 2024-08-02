@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
         categorySelector.appendChild(categoryButton);
         categories[categories.length - 1].button = categoryButton;
       }
-
       updateCategoryButtonCount(allCategoryButton, totalCommands);
 
       setupSearch();
