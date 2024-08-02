@@ -8,6 +8,10 @@
     color: var(--button-bg);
 }
 
+.container {
+    justify-content: unset;
+}
+
 .commands-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -16,18 +20,19 @@
 
 .command-card {
     text-align: left;
-    background-color: var(--bg-color-2);
-    border: 1px solid var(--button-bg);
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
     border-radius: 15px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     z-index: 10;
     box-shadow: 0 8px 17px rgba(0, 0, 0, 0);
-    transition: box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .command-card:hover {
+    border: 1px solid var(--button-bg);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
@@ -62,11 +67,14 @@
     font-size: 0.9rem;
     color: var(--text-color);
     margin-bottom: 0.5rem;
+    flex-grow: 1;
+    padding: 1rem;
+    margin: 0;
 }
 
 .command-details {
     padding-block: 1rem;
-    border-top: 1px solid var(--button-bg);
+    border-top: 1px solid var(--border-color);
     font-size: 0.8rem;
     color: var(--text-color-2);
 }
@@ -100,10 +108,10 @@ code {
     flex-grow: 1;
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    border: 1px solid var(--button-bg);
+    border: 1px solid var(--border-color);
     border-radius: 20px 0 0 20px;
     outline: none;
-    background-color: var(--bg-color-2);
+    background-color: var(--bg-color);
     color: var(--text-color);
     transition: all 0.3s ease;
 }
@@ -115,10 +123,16 @@ code {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
+.search-container:focus-within #searchInput,
+.search-container:focus-within #searchButton {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-bg);
+}
 
 #searchButton {
-    background-color: var(--bg-color-2);
-    border: 1px solid var(--button-bg);
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
     color: var(--text-color);
     padding: 0.6rem;
     cursor: pointer;
@@ -128,7 +142,7 @@ code {
 
 #searchButton:hover {
     background-color: #6d5c55;
-    color: var(--bg-color)
+    color: var(--bg-color-2)
 }
 
 body.dark-theme #searchButton:hover {
@@ -145,37 +159,48 @@ body.dark-theme #searchButton:hover {
 }
 
 .category-button {
+    font-family: 'Codec Pro', sans-serif;
     display: inline-flex;
     align-items: center;
-    background-color: var(--bg-color-2);
-    border: 1px solid var(--button-bg);
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 17px rgba(0, 0, 0, 0.0);
     color: var(--text-color);
     padding: 0.5rem;
-    border-radius: 20px;
+    border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
 }
 
+button:disabled,
+button[disabled] .command-count {
+    color: var(--border-color);
+}
+
+button:disabled:hover,
+button[disabled]:hover .command-count {
+    color: var(--border-color);
+}
+
 h2 {
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--button-bg);
+    border: 1px solid var(--border-color);
     border-radius: 15px;
     color: var(--text-color) !important;
 }
 
 .category-button .command-count {
     position: absolute;
-    left: 0.25rem;
+    left: 0.20rem;
     width: 24px;
     height: 24px;
-    border-radius: 50%;
-    background-color: var(--button-bg);
-    color: var(--button-text);
+    border-radius: 15px;
+    color: var(--text-color);
     font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .category-button .category-name {
@@ -186,15 +211,17 @@ h2 {
 
 .category-button:hover,
 .category-button.active {
+    border-color: var(--button-bg);
     background-color: var(--button-bg);
     color: var(--button-text);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .category-button:hover .command-count,
 .category-button.active .command-count {
-    background-color: var(--button-text);
-    color: var(--button-bg);
+    color: var(--button-text);
 }
+
 
 .commands-grid {
     display: grid;
@@ -208,12 +235,6 @@ h2 {
     flex-direction: column;
 }
 
-.command-card p {
-    flex-grow: 1;
-    padding: 1rem;
-    margin: 0;
-}
-
 .back-to-top-button {
     position: fixed;
     bottom: -70px;
@@ -223,18 +244,19 @@ h2 {
     height: 70px;
     outline: none;
     background-color: var(--bg-color);
-    border: 1px solid var(--button-bg);
+    border: 1px solid var(--border-color);
     color: var(--text-color);
     cursor: pointer;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: bottom 0.3s, background-color 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .back-to-top-button:hover {
     background-color: var(--button-bg);
+    border-color: var(--button-bg);
 }
 
 .back-to-top-button.show {
@@ -243,6 +265,7 @@ h2 {
 
 @media (max-width: 1200px) {
     .commands-grid {
+        width: unset;
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -254,15 +277,6 @@ h2 {
 }
 
 @media (max-width: 600px) {
-    #categorySelector {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
-    }
-
-    .category-button {
-        width: 100%;
-    }
 
     .category-button .command-count {
         left: 0.35rem;
@@ -275,16 +289,19 @@ h2 {
         font-size: 0.9rem;
     }
 
-    .commands-grid {
-        grid-template-columns: 1fr;
-        width: unset;
+    .container {
+        padding: unset;
     }
 
-    .command-card {
-        width: 375px;
+    .commands-grid {
+        grid-template-columns: 1fr;
+        overflow: hidden;
+        padding: 1rem;
     }
 
     .back-to-top-button {
+        background-color: transparent;
+        backdrop-filter: blur(10px);
         right: 50%;
         transform: translateX(50%);
     }

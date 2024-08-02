@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   let allCommands = [];
   let categories = [];
+  let currentSearchTerm = "";
 
   fetch("commands.json")
     .then((response) => response.json())
@@ -61,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
           name: category,
           element: categoryElement,
           commands: categoryCommands,
+          button: null,
         });
 
         const categoryButton = createCategoryButton(
@@ -69,12 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         categoryButton.addEventListener("click", () => showCategory(category));
         categorySelector.appendChild(categoryButton);
+        categories[categories.length - 1].button = categoryButton;
       }
 
       updateCategoryButtonCount(allCategoryButton, totalCommands);
 
       setupSearch();
-      showCategory(categories[0].name);
+      showCategory("All");
     })
     .catch((error) => console.error("Error loading commands:", error));
 
@@ -90,25 +93,83 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateCategoryButtonCount(button, count) {
     button.querySelector(".command-count").textContent = count;
+    button.disabled = count === 0;
   }
 
   function showCategory(categoryName) {
+    const commandsContainer = document.getElementById("commandsContainer");
+    commandsContainer.innerHTML = "";
+
+    let visibleCommandsCount = 0;
+
     if (categoryName === "All") {
-      categories.forEach((category) => {
-        category.element.style.display = "block";
+      const allCommandsGrid = document.createElement("div");
+      allCommandsGrid.className = "commands-grid";
+
+      allCommands.forEach((command) => {
+        const commandElement = command.element.cloneNode(true);
+        if (commandMatchesSearch(command, currentSearchTerm)) {
+          commandElement.style.display = "";
+          visibleCommandsCount++;
+        } else {
+          commandElement.style.display = "none";
+        }
+        allCommandsGrid.appendChild(commandElement);
       });
+
+      commandsContainer.appendChild(allCommandsGrid);
     } else {
-      categories.forEach((category) => {
-        category.element.style.display =
-          category.name === categoryName ? "block" : "none";
-      });
+      const category = categories.find((cat) => cat.name === categoryName);
+      if (category) {
+        const categoryGrid = category.element
+          .querySelector(".commands-grid")
+          .cloneNode(true);
+        category.commands.forEach((command, index) => {
+          if (commandMatchesSearch(command, currentSearchTerm)) {
+            categoryGrid.children[index].style.display = "";
+            visibleCommandsCount++;
+          } else {
+            categoryGrid.children[index].style.display = "none";
+          }
+        });
+        commandsContainer.appendChild(categoryGrid);
+      }
     }
+
+    if (visibleCommandsCount === 0) {
+      const noResultsDiv = createNoResultsDiv();
+      commandsContainer.appendChild(noResultsDiv);
+    }
+
     document.querySelectorAll(".category-button").forEach((button) => {
-      button.classList.toggle(
-        "active",
-        button.querySelector(".category-name").textContent === categoryName
-      );
+      const buttonCategoryName =
+        button.querySelector(".category-name").textContent;
+      button.classList.toggle("active", buttonCategoryName === categoryName);
     });
+  }
+
+  function createNoResultsDiv() {
+    const noResultsDiv = document.createElement("div");
+    noResultsDiv.className = "no-results";
+    noResultsDiv.style.cssText = `
+      height: calc(var(--card-height) * 2 + var(--grid-gap));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      color: var(--text-color);
+      text-align: center;
+      width: 100%;
+    `;
+    noResultsDiv.textContent = "Alas, nothing here.";
+    return noResultsDiv;
+  }
+
+  function commandMatchesSearch(command, searchTerm) {
+    return (
+      command.name.toLowerCase().includes(searchTerm) ||
+      command.info.description.toLowerCase().includes(searchTerm)
+    );
   }
 
   function setupSearch() {
@@ -116,33 +177,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById("searchButton");
 
     function performSearch() {
-      const searchTerm = searchInput.value.toLowerCase().trim();
+      currentSearchTerm = searchInput.value.toLowerCase().trim();
+
+      showCategory("All");
 
       let visibleCommandsCount = 0;
 
       categories.forEach((category) => {
-        let categoryVisibleCount = 0;
+        let categoryVisibleCount = category.commands.filter((command) =>
+          commandMatchesSearch(command, currentSearchTerm)
+        ).length;
 
-        category.commands.forEach(({ name, info, element }) => {
-          const matches =
-            searchTerm === "" ||
-            name.toLowerCase().includes(searchTerm) ||
-            info.description.toLowerCase().includes(searchTerm);
-          element.style.display = matches ? "" : "none";
-          if (matches) {
-            categoryVisibleCount++;
-            visibleCommandsCount++;
-          }
-        });
+        visibleCommandsCount += categoryVisibleCount;
 
-        category.element.style.display =
-          categoryVisibleCount > 0 ? "block" : "none";
-        updateCategoryButtonCount(
-          document.querySelector(
-            `.category-button:nth-child(${categories.indexOf(category) + 2})`
-          ),
-          categoryVisibleCount
-        );
+        updateCategoryButtonCount(category.button, categoryVisibleCount);
       });
 
       updateCategoryButtonCount(
@@ -153,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".category-button").forEach((button) => {
         button.classList.toggle(
           "active",
-          button === document.querySelector(".category-button:first-child")
+          button.querySelector(".category-name").textContent === "All"
         );
       });
     }
@@ -233,7 +281,10 @@ window.onscroll = function () {
 
 function scrollFunction() {
   console.log("Checking scroll position...");
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  if (
+    document.body.scrollTop > 550 ||
+    document.documentElement.scrollTop > 550
+  ) {
     console.log("Showing button");
     backToTopBtn.classList.add("show");
   } else {
