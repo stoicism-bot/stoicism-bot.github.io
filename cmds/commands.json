@@ -274,6 +274,68 @@
           "required": false
         }
       ]
+    },
+    "warn": {
+      "description": "Warns a user",
+      "permissions": ["kick members"],
+      "arguments": [
+        {
+          "name": "member",
+          "description": "No description provided",
+          "default": null,
+          "required": true
+        },
+        {
+          "name": "reason",
+          "description": "No description provided",
+          "default": "no reason",
+          "required": false
+        }
+      ],
+      "subcommands": {
+        "list": {
+          "description": "View a user's warn history.",
+          "permissions": ["kick members"],
+          "arguments": [
+            {
+              "name": "member",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        },
+        "action": {
+          "description": "Set automated actions for warning thresholds",
+          "permissions": ["administrator"],
+          "arguments": [
+            {
+              "name": "action",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            },
+            {
+              "name": "threshold",
+              "description": "No description provided",
+              "default": null,
+              "required": true
+            }
+          ]
+        }
+      }
+    },
+    "pardon": {
+      "description": "Remove a warning by its ID",
+      "permissions": ["kick members"],
+      "arguments": [
+        {
+          "name": "warn_id",
+          "description": "No description provided",
+          "default": null,
+          "required": true
+        }
+      ]
     }
   },
   "Fun": {
