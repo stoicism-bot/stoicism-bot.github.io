@@ -238,18 +238,20 @@ function createCommandCard(name, info) {
 }
 function createArgumentsString(args) {
   if (!args || args.length === 0)
-    return "<p><strong>Arguments<br> </strong> <code>None</code></p>";
+    return "<p>arguments<br> <code id='arg'>None</code></p>";
 
-  const argsList = args.map((arg) => `<code>${arg.name}</code>`).join(" ");
+  const argsList = args
+    .map((arg) => `<code id='arg'>${arg.name}</code>`)
+    .join(" ");
 
-  return `<p><strong>Arguments<br> </strong> ${argsList}</p>`;
+  return `<p>arguments<br> ${argsList}</p>`;
 }
 
 function createPermissionsString(permissions) {
   if (!permissions || permissions.length === 0)
-    return "<p><strong>Permissions<br> </strong> <code>None</code></p>";
+    return "<p>permissions<br> <code id='arg'>None</code></p>";
 
-  return `<p><strong>Permissions<br> </strong> <code>${permissions.join(
+  return `<p>permissions<br> <code id='arg'>${permissions.join(
     ", "
   )}</code></p>`;
 }

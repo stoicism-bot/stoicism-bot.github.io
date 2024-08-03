@@ -567,6 +567,54 @@
       "arguments": []
     }
   },
+  "Snipe": {
+    "clearsnipe": {
+      "description": "Clear all results for reactions, edits and messages",
+      "permissions": ["manage messages"],
+      "arguments": []
+    },
+    "reactionsnipe": {
+      "description": "Snipe the latest reaction that was removed",
+      "permissions": [],
+      "arguments": []
+    },
+    "reactionhistory": {
+      "description": "See logged reactions for a message",
+      "permissions": ["manage messages"],
+      "arguments": [
+        {
+          "name": "message link / reply",
+          "description": "No description provided",
+          "default": "None",
+          "required": false
+        }
+      ]
+    },
+    "editsnipe": {
+      "description": "Snipe the latest message that was edited",
+      "permissions": [],
+      "arguments": [
+        {
+          "name": "index",
+          "description": "No description provided",
+          "default": "1",
+          "required": false
+        }
+      ]
+    },
+    "snipe": {
+      "description": "Snipe the latest message that was deleted",
+      "permissions": [],
+      "arguments": [
+        {
+          "name": "index",
+          "description": "No description provided",
+          "default": "1",
+          "required": false
+        }
+      ]
+    }
+  },
   "Counters": {
     "counter": {
       "description": "Create counters for everybody to see",
