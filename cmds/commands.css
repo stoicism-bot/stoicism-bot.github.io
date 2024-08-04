@@ -136,7 +136,6 @@ code {
 
 .search-container:focus-within #searchInput,
 .search-container:focus-within #searchButton {
-    background-color: var(--button-bg);
     color: var(--button-text);
     border-color: var(--button-bg);
 }
