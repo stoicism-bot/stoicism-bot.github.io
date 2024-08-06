@@ -305,6 +305,10 @@ h2 {
         font-size: 0.9rem;
     }
 
+    #categorySelector {
+        padding: 1rem;
+    }
+
     .container {
         padding: unset;
     }
@@ -321,5 +325,10 @@ h2 {
         backdrop-filter: blur(10px);
         right: 50%;
         transform: translateX(50%);
+    }
+
+    .back-to-top-button:hover {
+        background-color: unset;
+        border: 1px solid var(--border-color);
     }
 }
